@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { MenuBar } from './mainbar.js'
 import * as serviceWorker from './serviceWorker';
+
+function App() {
+    return <div>
+        <MenuBar />
+        <div>This is my app</div>
+    </div>
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
