@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { MenuBar } from './mainbar.js'
+import { MenuBar } from './mainbar.js';
 import * as serviceWorker from './serviceWorker';
+import { LongPiano } from './piano.js';
 
 function App() {
     return <div>
         <MenuBar />
         <div>This is my app</div>
+        <LongPiano />
     </div>
 }
 
