@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano';
+import { KEY_RANGE } from './keybindings'
 import SoundfontProvider from './SoundFontProvider.js';
 import 'react-piano/dist/styles.css';
 import './piano.css';
@@ -17,7 +18,7 @@ export function LongPiano() {
     const keyboardShortcuts = KeyboardShortcuts.create({
         firstNote: firstNote,
         lastNote: lastNote,
-        keyboardConfig: KeyboardShortcuts.HOME_ROW,
+        keyboardConfig: KEY_RANGE,
     });
     return <div>
         <SoundfontProvider

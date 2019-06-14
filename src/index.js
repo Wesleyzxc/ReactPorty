@@ -4,6 +4,7 @@ import './index.css';
 import { MenuBar } from './mainbar.js';
 import * as serviceWorker from './serviceWorker';
 import { LongPiano } from './piano.js';
+import { DisplayScreen } from './notes.js';
 
 document.title = 'Super Cool Website 😋';
 
@@ -12,6 +13,7 @@ function App() {
         <div>
             <MenuBar />
             <div>This is my app</div>
+            <DisplayScreen />
             <LongPiano />
         </div>
     );
