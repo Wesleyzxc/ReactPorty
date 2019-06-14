@@ -10,15 +10,22 @@ const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
 
 export function LongPiano() {
     const noteRange = {
-        first: MidiNumbers.fromNote('c3'),
-        last: MidiNumbers.fromNote('b6'),
+        first: MidiNumbers.fromNote('a0'),
+        last: MidiNumbers.fromNote('c8'),
     };
-    const firstNote = MidiNumbers.fromNote('c3');
-    const lastNote = MidiNumbers.fromNote('b6');
+    const firstNote = noteRange.first;
+    const lastNote = noteRange.last;
     const keyboardShortcuts = KeyboardShortcuts.create({
         firstNote: firstNote,
         lastNote: lastNote,
         keyboardConfig: KEY_RANGE,
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('keydown', event => {
+            console.log(event);
+            const key = event.code;
+            console.log(key);
+        });
     });
     return <div>
         <SoundfontProvider
@@ -28,7 +35,8 @@ export function LongPiano() {
             render={({ isLoading, playNote, stopNote }) => (
                 <Piano className="piano"
                     noteRange={noteRange}
-                    width={window.innerWidth - 300}
+                    width={window.innerWidth - 100}
+                    keyWidthToHeight={0.2}
                     playNote={playNote}
                     stopNote={stopNote}
                     disabled={isLoading}
