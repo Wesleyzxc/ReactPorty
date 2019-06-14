@@ -1,0 +1,31 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    background-color: grey;
+    text-align: right;
+  }
+
+li {
+    display: inline;
+    border: none;
+    text-align: right;
+
+
+}
+
+li a {
+    text-decoration: none;
+    width: 50px;
+    padding: 10px;
+    margin: 30px;
+    color: black;
+    transition: background-color 0.5s, color 0.5s;
+
+}
+
+li a:hover {
+    background-color: #555;
+    color: white;
+}
