@@ -5,12 +5,16 @@ import { MenuBar } from './mainbar.js';
 import * as serviceWorker from './serviceWorker';
 import { LongPiano } from './piano.js';
 
+document.title = 'Super Cool Website 😋';
+
 function App() {
-    return <div>
-        <MenuBar />
-        <div>This is my app</div>
-        <LongPiano />
-    </div>
+    return (
+        <div>
+            <MenuBar />
+            <div>This is my app</div>
+            <LongPiano />
+        </div>
+    );
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
