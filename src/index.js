@@ -4,7 +4,7 @@ import './index.css';
 import { MenuBar } from './mainbar.js';
 import * as serviceWorker from './serviceWorker';
 import { LongPiano } from './piano.js';
-import { FileOpener } from './openFile.js';
+import { FileHandler } from "./fileHandler";
 
 document.title = 'Super Cool Website 😋';
 
@@ -13,7 +13,7 @@ function App() {
         <div>
             <MenuBar />
             <div>This is my app</div>
-            <FileOpener />
+            <FileHandler />
             <LongPiano />
         </div>
     );
