@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { MenuBar } from './mainbar.js';
+import { MenuBar } from './mainbar';
 import * as serviceWorker from './serviceWorker';
-import { LongPiano } from './piano.js';
-import { FileHandler } from "./fileHandler";
+import { LongPiano } from './piano';
+import { FileHandler } from './fileHandler';
+import Login from './Login';
+import Popup from 'reactjs-popup';
 
 document.title = 'Super Cool Website 😋';
 
-function App() {
+function App(props) {
+    const [popup, setPopup] = useState(false);
+    const toggle = () => {
+        setPopup(!popup);
+        console.log(popup);
+    };
     return (
         <div>
-            <MenuBar />
-            <div>This is my app</div>
-            <FileHandler />
-            <LongPiano />
+            <div>
+                <MenuBar toggle={toggle} />
+                <div>This is my app</div>
+                <FileHandler />
+                <LongPiano />
+            </div>
+
+            <div>
+                {popup ? (
+                    //TODO: Popup not working
+                    //<Popup>
+                    <div>
+                        <Login />
+                    </div>
+                ) : //</Popup>
+                null}
+            </div>
         </div>
     );
 }

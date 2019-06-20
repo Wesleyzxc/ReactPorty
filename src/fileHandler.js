@@ -15,11 +15,12 @@ export function FileHandler() {
         console.log(midi);
         if (midi) {
             let notes = getNotes(midi.tracks[0].notes);
-            document.getElementById("textarea").value = midi.name + "\n" + notes;
+            document.getElementById('textarea').value =
+                midi.name + '\n' + notes;
         }
-    }, [midi])
+    }, [midi]);
 
-    const handleSubmit = async function (event) {
+    const handleSubmit = async function(event) {
         event.preventDefault();
         let file = fileInput.current.files[0];
 
@@ -28,29 +29,26 @@ export function FileHandler() {
             if (file.name.endsWith('.mid')) {
                 let reader = new FileReader();
                 reader.readAsArrayBuffer(file);
-                reader.onload = function () {
-                    let arrayBuffer = this.result, array = new Uint8Array(arrayBuffer);
+                reader.onload = function() {
+                    let arrayBuffer = this.result,
+                        array = new Uint8Array(arrayBuffer);
                     setMidi(new Midi(array));
                 };
-
-
-            }
-            else {
-                alert("Select a correct midi file!");
+            } else {
+                alert('Select a correct midi file!');
             }
         }
-
     };
-    return <div>
-        <form onSubmit={handleSubmit}>
-            <input type="file" accept="audio/midi" ref={fileInput}></input>
-            <button id="submitFile" type="submit">Save</button>
-            <br></br>
-            <textarea id="textarea">
-
-            </textarea>
-
-        </form>
-
-    </div>;
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input type="file" accept="audio/midi" ref={fileInput} />
+                <button id="submitFile" type="submit">
+                    Save
+                </button>
+                <br />
+                <textarea id="textarea" />
+            </form>
+        </div>
+    );
 }
