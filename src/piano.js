@@ -20,13 +20,14 @@ export function LongPiano() {
         lastNote: lastNote,
         keyboardConfig: KEY_RANGE,
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        document.addEventListener('keydown', event => {
-            console.log(event);
-            const key = event.code;
-            console.log(key);
-        });
-    });
+
+    // More precise key press but not available
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     document.addEventListener('keydown', event => {
+    //         const key = event.code;
+    //         console.log(key);
+    //     });
+    // });
     return <div>
         <SoundfontProvider
             instrumentName="acoustic_grand_piano"

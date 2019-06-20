@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { Redirect, Route } from 'react-router-dom';
 // Routing tutorial & auth https://blog.strapi.io/protected-routes-and-authentication-with-react-and-node-js/
 const login = (props) => {
