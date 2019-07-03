@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Midi from '@tonejs/midi';
+import { NOTE_TO_KEY } from './keybindings';
 
 function getNotes(data) {
     let notes = [];
@@ -7,20 +8,27 @@ function getNotes(data) {
     return notes;
 }
 
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
+
 export function FileHandler() {
     const fileInput = React.createRef();
     const [midi, setMidi] = useState();
+    const [midiInfo, setMidiInfo] = useState("");
 
     useEffect(() => {
-        console.log(midi);
         if (midi) {
             let notes = getNotes(midi.tracks[0].notes);
-            document.getElementById('textarea').value =
-                midi.name + '\n' + notes;
+            let noteStr = notes.join();
+            NOTE_TO_KEY.map(notePair => {
+                noteStr = replaceAll(noteStr, notePair[0], notePair[1]);
+            })
+            setMidiInfo(midi.name + "\n" + noteStr);
         }
-    }, [midi]);
+    }, [midi])
 
-    const handleSubmit = async function(event) {
+    const handleSubmit = async function (event) {
         event.preventDefault();
         let file = fileInput.current.files[0];
 
@@ -29,26 +37,29 @@ export function FileHandler() {
             if (file.name.endsWith('.mid')) {
                 let reader = new FileReader();
                 reader.readAsArrayBuffer(file);
-                reader.onload = function() {
-                    let arrayBuffer = this.result,
-                        array = new Uint8Array(arrayBuffer);
+                reader.onload = function () {
+                    let arrayBuffer = this.result, array = new Uint8Array(arrayBuffer);
                     setMidi(new Midi(array));
                 };
-            } else {
-                alert('Select a correct midi file!');
+
+
+            }
+            else {
+                alert("Select a correct midi file!");
             }
         }
+
     };
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="file" accept="audio/midi" ref={fileInput} />
-                <button id="submitFile" type="submit">
-                    Save
-                </button>
-                <br />
-                <textarea id="textarea" />
-            </form>
-        </div>
-    );
+    return <div>
+        <form onSubmit={handleSubmit}>
+            <input type="file" accept="audio/midi" ref={fileInput}></input>
+            <button id="submitFile" type="submit">Save</button>
+            <br></br>
+            <textarea id="textarea" value={midiInfo}>
+
+            </textarea>
+
+        </form>
+
+    </div>;
 }
