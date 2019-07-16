@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#midiload, #submitFile {
+  display: block;
+  margin: 5px auto;
+  padding: 5px;
+}
+
+#midiload {
+  height: 100px;
+}
+
+#textarea {
+  width: 500px;
+  height: 100px;
+  display: block;
+  margin: auto;
+}

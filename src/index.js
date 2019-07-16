@@ -20,7 +20,6 @@ function App(props) {
         <div>
             <div>
                 <MenuBar toggle={toggle} />
-                <div>This is my app</div>
                 <FileHandler />
                 <LongPiano />
             </div>
@@ -33,7 +32,7 @@ function App(props) {
                         <Login />
                     </div>
                 ) : //</Popup>
-                null}
+                    null}
             </div>
         </div>
     );

@@ -70,12 +70,9 @@ export function FileHandler() {
     };
     return <div>
         <form onSubmit={handleSubmit}>
-            <input type="file" accept="audio/midi" ref={fileInput}></input>
-            <button id="submitFile" type="submit">Save</button>
-            <br></br>
-            <textarea id="textarea" value={midiInfo}>
-
-            </textarea>
+            <input id="midiload" type="file" accept="audio/midi" ref={fileInput}></input>
+            <button id="submitFile" type="submit">Convert</button>
+            <textarea id="textarea" value={midiInfo}></textarea>
 
         </form>
 
