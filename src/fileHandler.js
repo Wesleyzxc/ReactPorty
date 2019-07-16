@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Midi from '@tonejs/midi';
+import './index.css';
 import { NOTE_TO_KEY } from './keybindings';
 
 function getNotes(data) {
@@ -8,22 +9,39 @@ function getNotes(data) {
     return notes;
 }
 
+function getTime(data) {
+    let times = [];
+    data.forEach((timing) => times.push(timing.time));
+    return times;
+}
+
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
 
 export function FileHandler() {
     const fileInput = React.createRef();
+
+    // JSON of midi
     const [midi, setMidi] = useState();
     const [midiInfo, setMidiInfo] = useState("");
 
     useEffect(() => {
         if (midi) {
+            console.log(midi)
             let notes = getNotes(midi.tracks[0].notes);
-            let noteStr = notes.join();
+            let timing = getTime(midi.tracks[0].notes);
+
+            let notesAndTime = notes.map((e, i) => timing[i] + e);
+            // information of all notes in midi
+            let noteStr = notesAndTime.join();
+
+            // noteStr is replaced by all keys
             NOTE_TO_KEY.map(notePair => {
                 noteStr = replaceAll(noteStr, notePair[0], notePair[1]);
             })
+            console.log(notesAndTime);
+
             setMidiInfo(midi.name + "\n" + noteStr);
         }
     }, [midi])
@@ -60,6 +78,8 @@ export function FileHandler() {
             </textarea>
 
         </form>
+
+
 
     </div>;
 }
