@@ -32,7 +32,7 @@ export function FileHandler() {
             let notes = getNotes(midi.tracks[0].notes);
             let timing = getTime(midi.tracks[0].notes);
 
-            let notesAndTime = notes.map((e, i) => timing[i] + e);
+            let notesAndTime = notes.map((e, i) => timing[i] + " " + e);
             // information of all notes in midi
             let noteStr = notesAndTime.join();
 
