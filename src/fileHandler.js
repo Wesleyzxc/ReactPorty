@@ -32,15 +32,31 @@ export function FileHandler() {
             let notes = getNotes(midi.tracks[0].notes);
             let timing = getTime(midi.tracks[0].notes);
 
-            let notesAndTime = notes.map((e, i) => timing[i] + " " + e);
+            let orderedNotes = [];
+            // first note
+
+            timing.map((oneTime, index) => {
+                if (index === 0) { orderedNotes.push(notes[0])}
+
+                else if (oneTime === timing[index-1])
+                    {
+                        orderedNotes.push(notes[index]);
+                    }
+                    else
+                    {
+                        orderedNotes.push("\n" + notes[index]);
+                    }
+                }
+            )
+
+
             // information of all notes in midi
-            let noteStr = notesAndTime.join();
+            let noteStr = orderedNotes.join();
 
             // noteStr is replaced by all keys
             NOTE_TO_KEY.map(notePair => {
                 noteStr = replaceAll(noteStr, notePair[0], notePair[1]);
             })
-            console.log(notesAndTime);
 
             setMidiInfo(midi.name + "\n" + noteStr);
         }
@@ -72,7 +88,7 @@ export function FileHandler() {
         <form onSubmit={handleSubmit}>
             <input id="midiload" type="file" accept="audio/midi" ref={fileInput}></input>
             <button id="submitFile" type="submit">Convert</button>
-            <textarea id="textarea" value={midiInfo}></textarea>
+            <textarea disabled id="textarea" value={midiInfo}></textarea>
 
         </form>
 
