@@ -100,7 +100,7 @@ function DisplayArea(props) {
 
     return (
 
-        <TextareaAutosize
+        <TextareaAutosize disabled
             useCacheForDOMMeasurements
             value={props.midiInfo}
             onChange={e => this.setState({ value: e.target.value })}
