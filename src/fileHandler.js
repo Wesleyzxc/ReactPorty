@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Midi from '@tonejs/midi';
+import TextareaAutosize from 'react-textarea-autosize';
+
 import './index.css';
 import { NOTE_TO_KEY } from './keybindings';
 
@@ -25,6 +27,7 @@ export function FileHandler() {
     // JSON of midi
     const [midi, setMidi] = useState();
     const [midiInfo, setMidiInfo] = useState("");
+    let orderedNotes = [];
 
     useEffect(() => {
         if (midi) {
@@ -32,7 +35,6 @@ export function FileHandler() {
             let notes = getNotes(midi.tracks[0].notes);
             let timing = getTime(midi.tracks[0].notes);
             console.log(timing);
-            let orderedNotes = [];
             // first note
 
             timing.map((oneTime, index) => {
@@ -87,8 +89,9 @@ export function FileHandler() {
             <input id="midiload" type="file" accept="audio/midi" ref={fileInput}></input>
             <button id="submitFile" type="submit">Convert</button>
         </form>
-
-        <DisplayArea midiInfo={midiInfo} />
+        <div id="textarea">
+            <DisplayArea midiInfo={midiInfo} orderedNotes={orderedNotes} />
+        </div>
 
     </div>;
 }
@@ -96,7 +99,14 @@ export function FileHandler() {
 function DisplayArea(props) {
 
     return (
-        <textarea disabled id="textarea" value={props.midiInfo}></textarea>
+
+        <TextareaAutosize
+            useCacheForDOMMeasurements
+            value={props.midiInfo}
+            onChange={e => this.setState({ value: e.target.value })}
+        />
+
+
 
     )
 }

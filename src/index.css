@@ -23,8 +23,7 @@ code {
 }
 
 #textarea {
-  width: 500px;
-  height: 100px;
+  width: 150px;
   display: block;
   margin: auto;
 }
