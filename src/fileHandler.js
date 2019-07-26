@@ -31,22 +31,20 @@ export function FileHandler() {
             console.log(midi)
             let notes = getNotes(midi.tracks[0].notes);
             let timing = getTime(midi.tracks[0].notes);
-
+            console.log(timing);
             let orderedNotes = [];
             // first note
 
             timing.map((oneTime, index) => {
-                if (index === 0) { orderedNotes.push(notes[0])}
+                if (index === 0) { orderedNotes.push(notes[0]) }
 
-                else if (oneTime === timing[index-1])
-                    {
-                        orderedNotes.push(notes[index]);
-                    }
-                    else
-                    {
-                        orderedNotes.push("\n" + notes[index]);
-                    }
+                else if (oneTime === timing[index - 1]) { // current time is same as previous
+                    orderedNotes.push(notes[index]);
                 }
+                else { // current time is not the same as the previous
+                    orderedNotes.push("\n" + notes[index]);
+                }
+            }
             )
 
 
@@ -88,11 +86,19 @@ export function FileHandler() {
         <form onSubmit={handleSubmit}>
             <input id="midiload" type="file" accept="audio/midi" ref={fileInput}></input>
             <button id="submitFile" type="submit">Convert</button>
-            <textarea disabled id="textarea" value={midiInfo}></textarea>
-
         </form>
 
-
+        <DisplayArea midiInfo={midiInfo} />
 
     </div>;
 }
+
+function DisplayArea(props) {
+
+    return (
+        <textarea disabled id="textarea" value={props.midiInfo}></textarea>
+
+    )
+}
+
+

@@ -16,6 +16,7 @@ function App(props) {
         setPopup(!popup);
         console.log(popup);
     };
+
     return (
         <div>
             <div>
