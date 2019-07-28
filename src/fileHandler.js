@@ -5,21 +5,35 @@ import TextareaAutosize from 'react-textarea-autosize';
 import './index.css';
 import { NOTE_TO_KEY } from './keybindings';
 
-function getNotes(data) {
-    let notes = [];
-    data.forEach((note) => notes.push(note.name));
+function getNotes(midi, track) {
+    let notes = midi.tracks[track].notes.map(note => {
+        return { note: note.name, time: note.time };
+    });
+    console.log(notes);
     return notes;
 }
 
-function getTime(data) {
-    let times = [];
-    data.forEach((timing) => times.push(timing.time));
-    return times;
-}
 
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
+
+function organiseNotes(midi, orderedNotes) {
+    // right hand
+    let notes = getNotes(midi, 0);
+
+    notes.forEach((oneTime, index) => {
+        if (index === 0) { orderedNotes.push(notes[0].note) }
+
+        else if (oneTime.time === notes[index - 1].time) { // current time is same as previous
+            orderedNotes.push(notes[index].note);
+        }
+        else { // current time is not the same as the previous
+            orderedNotes.push("\n" + notes[index].note);
+        }
+    });
+}
+
 
 export function FileHandler() {
     const fileInput = React.createRef();
@@ -27,34 +41,21 @@ export function FileHandler() {
     // JSON of midi
     const [midi, setMidi] = useState();
     const [midiInfo, setMidiInfo] = useState("");
+
     let orderedNotes = [];
+    let orderedNotes2 = [];
 
     useEffect(() => {
         if (midi) {
-            console.log(midi)
-            let notes = getNotes(midi.tracks[0].notes);
-            let timing = getTime(midi.tracks[0].notes);
-            console.log(timing);
-            // first note
-
-            timing.map((oneTime, index) => {
-                if (index === 0) { orderedNotes.push(notes[0]) }
-
-                else if (oneTime === timing[index - 1]) { // current time is same as previous
-                    orderedNotes.push(notes[index]);
-                }
-                else { // current time is not the same as the previous
-                    orderedNotes.push("\n" + notes[index]);
-                }
-            }
-            )
+            // group same timing
+            organiseNotes(midi, orderedNotes);
 
 
-            // information of all notes in midi
+            // information of all notes in midi in string format
             let noteStr = orderedNotes.join();
 
             // noteStr is replaced by all keys
-            NOTE_TO_KEY.map(notePair => {
+            NOTE_TO_KEY.forEach(notePair => {
                 noteStr = replaceAll(noteStr, notePair[0], notePair[1]);
             })
 
@@ -91,6 +92,8 @@ export function FileHandler() {
         </form>
         <div id="textarea">
             <DisplayArea midiInfo={midiInfo} orderedNotes={orderedNotes} />
+
+
         </div>
 
     </div>;
