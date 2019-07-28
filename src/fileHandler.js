@@ -9,7 +9,6 @@ function getNotes(midi, track) {
     let notes = midi.tracks[track].notes.map(note => {
         return { note: note.name, time: note.time };
     });
-    console.log(notes);
     return notes;
 }
 
@@ -18,22 +17,20 @@ function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
 
-function organiseNotes(midi, orderedNotes) {
-    // right hand
-    let notes = getNotes(midi, 0);
+// Adds newline to array based on timing
+function organiseNotes(notes, modifiedArray) {
 
     notes.forEach((oneTime, index) => {
-        if (index === 0) { orderedNotes.push(notes[0].note) }
+        if (index === 0) { modifiedArray.push(notes[0].note) }
 
         else if (oneTime.time === notes[index - 1].time) { // current time is same as previous
-            orderedNotes.push(notes[index].note);
+            modifiedArray.push(notes[index].note);
         }
         else { // current time is not the same as the previous
-            orderedNotes.push("\n" + notes[index].note);
+            modifiedArray.push("\n" + notes[index].note);
         }
     });
 }
-
 
 export function FileHandler() {
     const fileInput = React.createRef();
@@ -43,13 +40,19 @@ export function FileHandler() {
     const [midiInfo, setMidiInfo] = useState("");
 
     let orderedNotes = [];
-    let orderedNotes2 = [];
 
     useEffect(() => {
         if (midi) {
-            // group same timing
-            organiseNotes(midi, orderedNotes);
+            let notes = getNotes(midi, 0);
+            let notes2 = [];
 
+            if (midi.tracks.length === 2) {
+                notes2 = getNotes(midi, 1);
+            }
+
+            let combinedHands = notes.concat(notes2);
+            combinedHands.sort(GetSortOrder("time"));
+            organiseNotes(combinedHands, orderedNotes);
 
             // information of all notes in midi in string format
             let noteStr = orderedNotes.join();
@@ -115,3 +118,14 @@ function DisplayArea(props) {
 }
 
 
+
+function GetSortOrder(prop) {
+    return function (a, b) {
+        if (a[prop] > b[prop]) {
+            return 1;
+        } else if (a[prop] < b[prop]) {
+            return -1;
+        }
+        return 0;
+    }
+}  
