@@ -61,7 +61,7 @@ export function FileHandler() {
             NOTE_TO_KEY.forEach(notePair => {
                 noteStr = replaceAll(noteStr, notePair[0], notePair[1]);
             })
-
+            console.log(orderedNotes);
             setMidiInfo(midi.name + "\n" + noteStr);
         }
     }, [midi])
@@ -87,16 +87,18 @@ export function FileHandler() {
             }
         }
 
+
     };
     return <div>
         <form onSubmit={handleSubmit}>
             <input id="midiload" type="file" accept="audio/midi" ref={fileInput}></input>
             <button id="submitFile" type="submit">Convert</button>
         </form>
+
+        {/* <textarea id='textarea' value={midiInfo} disabled={true}></textarea> */}
+
         <div id="textarea">
             <DisplayArea midiInfo={midiInfo} orderedNotes={orderedNotes} />
-
-
         </div>
 
     </div>;
@@ -111,7 +113,6 @@ function DisplayArea(props) {
             value={props.midiInfo}
             onChange={e => this.setState({ value: e.target.value })}
         />
-
 
 
     )

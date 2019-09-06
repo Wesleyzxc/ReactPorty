@@ -1,41 +1,43 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { MenuBar } from './mainbar';
+import './mainbar.css';
 import * as serviceWorker from './serviceWorker';
+import { Home, About } from './home';
 import { LongPiano } from './piano';
 import { FileHandler } from './fileHandler';
-import Login from './Login';
-import Popup from 'reactjs-popup';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-document.title = 'Super Cool Website 😋';
+document.title = 'Portfolioso 😋';
 
 function App(props) {
-    const [popup, setPopup] = useState(false);
-    const toggle = () => {
-        setPopup(!popup);
-        console.log(popup);
-    };
-
     return (
-        <div>
+        <Router>
             <div>
-                <MenuBar toggle={toggle} />
-                <FileHandler />
-                <LongPiano />
-            </div>
+                {/* Div for main top bar for routing */}
+                <ul>
+                    <li>
+                        <Link to={'/'} className="nav-link"> Home </Link>
+                    </li>
+                    <li>
+                        <Link to={'/piano'} className="nav-link"> Piano </Link>
+                    </li>
+                    <li>
+                        <Link to={'/about'} className="nav-link"> About </Link>
+                    </li>
+                </ul>
 
-            <div>
-                {popup ? (
-                    //TODO: Popup not working
-                    //<Popup>
-                    <div>
-                        <Login />
-                    </div>
-                ) : //</Popup>
-                    null}
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/piano" render={(props) => (<div><FileHandler /><LongPiano /> </div>)} />
+                    <Route exact path="/about" component={About} />
+
+                </Switch>
+                {/* <FileHandler />
+                <LongPiano /> */}
             </div>
-        </div>
+        </Router>
+
     );
 }
 
