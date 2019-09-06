@@ -15,7 +15,7 @@ function App(props) {
         <Router>
             <div>
                 {/* Div for main top bar for routing */}
-                <ul>
+                <ul className="topbar">
                     <li>
                         <Link to={'/'} className="nav-link"> Home </Link>
                     </li>

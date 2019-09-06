@@ -12,18 +12,34 @@ code {
     monospace;
 }
 
-#midiload, #submitFile {
+#midiload{
   display: block;
   margin: 5px auto;
   padding: 5px;
-}
-
-#midiload {
   height: 100px;
 }
+
+
+.groups {
+  text-align: center;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+#defaultsong, #submitFile {
+  padding: 5px;
+  margin: 15px;
+
+}
+
 
 #textarea {
   width: 150px;
   display: block;
   margin: auto;
+}
+
+
+.paras {
+  padding: 10px;
 }

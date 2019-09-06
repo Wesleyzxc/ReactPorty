@@ -10,8 +10,8 @@ const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
 
 export function LongPiano() {
     const noteRange = {
-        first: MidiNumbers.fromNote('c3'),
-        last: MidiNumbers.fromNote('c6')
+        first: MidiNumbers.fromNote('c2'),
+        last: MidiNumbers.fromNote('c5')
     };
     const firstNote = noteRange.first;
     const lastNote = noteRange.last;

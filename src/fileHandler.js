@@ -38,6 +38,7 @@ export function FileHandler() {
     // JSON of midi
     const [midi, setMidi] = useState();
     const [midiInfo, setMidiInfo] = useState("");
+    const [defaultSong, setDefaultSong] = useState("");
 
     let orderedNotes = [];
 
@@ -68,8 +69,12 @@ export function FileHandler() {
 
     const handleSubmit = async function (event) {
         event.preventDefault();
-        let file = fileInput.current.files[0];
+        let file;
 
+        if (defaultSong === "default") {
+            file = fileInput.current.files[0];
+        }
+        console.log(defaultSong);
         // if file selected
         if (file) {
             if (file.name.endsWith('.mid')) {
@@ -92,7 +97,18 @@ export function FileHandler() {
     return <div>
         <form onSubmit={handleSubmit}>
             <input id="midiload" type="file" accept="audio/midi" ref={fileInput}></input>
-            <button id="submitFile" type="submit">Convert</button>
+            <div className="groups">
+                <select id="defaultsong" onChange={() => {
+                    let e = document.getElementById('defaultsong');
+                    setDefaultSong(e.options[e.selectedIndex].value);
+                }}>
+                    <option value="default" selected>Choose one of the default songs to try! </option>
+                    <option value="twinkle">Twinkle Twinkle Little Star</option>
+                    <option value="happy">Happy and You Know it</option>
+                    <option value="lamb">Mary had a Little Lamb</option>
+                </select>
+                <button id="submitFile" type="submit">Convert</button>
+            </div>
         </form>
 
         {/* <textarea id='textarea' value={midiInfo} disabled={true}></textarea> */}
