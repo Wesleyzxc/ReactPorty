@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Midi from '@tonejs/midi';
 import TextareaAutosize from 'react-textarea-autosize';
-
+import happySong from './songs/happy_and_you_know_it.mid';
 import './index.css';
 import { NOTE_TO_KEY } from './keybindings';
 
@@ -32,13 +32,30 @@ function organiseNotes(notes, modifiedArray) {
     });
 }
 
+function checkDefaultSong(selectSong) {
+    if (selectSong === 0) {
+        return 0;
+    }
+    else if (selectSong === 1) {
+        return 1;
+    }
+
+    else if (selectSong === 2) {
+        return 2;
+    }
+
+    else if (selectSong === 3) {
+        return 3;
+    }
+}
+
 export function FileHandler() {
     const fileInput = React.createRef();
 
     // JSON of midi
     const [midi, setMidi] = useState();
     const [midiInfo, setMidiInfo] = useState("");
-    const [defaultSong, setDefaultSong] = useState("");
+    const [song, setSong] = useState(0);
 
     let orderedNotes = [];
 
@@ -69,12 +86,14 @@ export function FileHandler() {
 
     const handleSubmit = async function (event) {
         event.preventDefault();
-        let file;
+        let file = fileInput.current.files[0];
+        checkDefaultSong(song);
+        if (song !== 0) {
+            file = { happySong };
+            console.log(file);
 
-        if (defaultSong === "default") {
-            file = fileInput.current.files[0];
         }
-        console.log(defaultSong);
+
         // if file selected
         if (file) {
             if (file.name.endsWith('.mid')) {
@@ -100,12 +119,12 @@ export function FileHandler() {
             <div className="groups">
                 <select id="defaultsong" onChange={() => {
                     let e = document.getElementById('defaultsong');
-                    setDefaultSong(e.options[e.selectedIndex].value);
+                    setSong(parseInt(e.options[e.selectedIndex].value, 10));
                 }}>
-                    <option value="default" selected>Choose one of the default songs to try! </option>
-                    <option value="twinkle">Twinkle Twinkle Little Star</option>
-                    <option value="happy">Happy and You Know it</option>
-                    <option value="lamb">Mary had a Little Lamb</option>
+                    <option value="0" selected>Choose one of the default songs to try! </option>
+                    <option value="1">Twinkle Twinkle Little Star</option>
+                    <option value="2">Happy and You Know it</option>
+                    <option value="3">Mary had a Little Lamb</option>
                 </select>
                 <button id="submitFile" type="submit">Convert</button>
             </div>
