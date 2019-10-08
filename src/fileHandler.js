@@ -88,11 +88,18 @@ export function FileHandler() {
         event.preventDefault();
         let file = fileInput.current.files[0];
         checkDefaultSong(song);
-        if (song !== 0) {
-            file = { happySong };
-            console.log(file);
+        // if (song !== 0) {
+        //     file = { happySong };
+        //     console.log(file);
+        //     //TODO Convert happySong Object to Blob
+        //     const bytes = new TextEncoder().encode(file);
+        //     const blob = new Blob([bytes], {
+        //         type: "application/json;charset=utf-8"
+        //     });
+        //     file = blob;
+        //     console.log(file);
 
-        }
+        // }
 
         // if file selected
         if (file) {
