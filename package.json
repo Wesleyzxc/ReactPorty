@@ -14,8 +14,7 @@
     "react-textarea-autosize": "^7.1.0",
     "reactjs-popup": "^1.4.1",
     "soundfont-player": "^0.11.0",
-    "tone": "^13.4.9",
-	"songs": "1.0"
+    "tone": "^13.4.9"
   },
   "scripts": {
     "start": "react-scripts start",
