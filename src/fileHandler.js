@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Midi from '@tonejs/midi';
 import TextareaAutosize from 'react-textarea-autosize';
-import happySong from './songs/happy_and_you_know_it.mid';
+import twinkle_twinkle from './config';
 import './index.css';
 import { NOTE_TO_KEY } from './keybindings';
+
 
 function getNotes(midi, track) {
     let notes = midi.tracks[track].notes.map(note => {
@@ -79,7 +80,6 @@ export function FileHandler() {
             NOTE_TO_KEY.forEach(notePair => {
                 noteStr = replaceAll(noteStr, notePair[0], notePair[1]);
             })
-            console.log(orderedNotes);
             setMidiInfo(midi.name + "\n" + noteStr);
         }
     }, [midi])
@@ -88,36 +88,23 @@ export function FileHandler() {
         event.preventDefault();
         let file = fileInput.current.files[0];
         checkDefaultSong(song);
-        // if (song !== 0) {
-        //     file = { happySong };
-        //     console.log(file);
-        //     //TODO Convert happySong Object to Blob
-        //     const bytes = new TextEncoder().encode(file);
-        //     const blob = new Blob([bytes], {
-        //         type: "application/json;charset=utf-8"
-        //     });
-        //     file = blob;
-        //     console.log(file);
 
-        // }
 
         // if file selected
         if (file) {
             if (file.name.endsWith('.mid')) {
-                let reader = new FileReader();
-                reader.readAsArrayBuffer(file);
-                reader.onload = function () {
-                    let arrayBuffer = this.result, array = new Uint8Array(arrayBuffer);
-                    setMidi(new Midi(array));
-                };
-
-
+                ReadJSON(file, setMidi, false);
             }
             else {
+                //TODO make a nice pop up for wrong files
                 alert("Select a correct midi file!");
             }
         }
 
+        else if (song == 1) { // default song
+            file = twinkle_twinkle;
+            ReadJSON(file, setMidi, true);
+        }
 
     };
     return <div>
@@ -144,6 +131,35 @@ export function FileHandler() {
         </div>
 
     </div>;
+}
+
+async function ReadJSON(file, setMidi, isDefault) {
+    let reader = new FileReader();
+
+    if (isDefault) { // TODO file is incorrect when default
+        setMidi(file);
+    }
+    else {
+        reader.readAsArrayBuffer(file);
+        reader.onload = function () {
+            let arrayBuffer = this.result, array = new Uint8Array(arrayBuffer);
+            setMidi(new Midi(array));
+        };
+    }
+
+}
+
+function GetRequest(url) {
+    return fetch(url)
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+
+        })
+        .catch(function (error) {
+            console.log("There has been a problem with your fetch operation: ", error.message);
+        });
 }
 
 function DisplayArea(props) {
