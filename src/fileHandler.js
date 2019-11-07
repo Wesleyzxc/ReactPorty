@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Midi from '@tonejs/midi';
 import TextareaAutosize from 'react-textarea-autosize';
-import twinkle_twinkle from './config';
+import { twinkle_twinkle, happy_and_you_know_it, mary_had_a_lamb } from './config';
 import './index.css';
 import { NOTE_TO_KEY } from './keybindings';
 
@@ -12,7 +12,6 @@ function getNotes(midi, track) {
     });
     return notes;
 }
-
 
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
@@ -33,22 +32,6 @@ function organiseNotes(notes, modifiedArray) {
     });
 }
 
-function checkDefaultSong(selectSong) {
-    if (selectSong === 0) {
-        return 0;
-    }
-    else if (selectSong === 1) {
-        return 1;
-    }
-
-    else if (selectSong === 2) {
-        return 2;
-    }
-
-    else if (selectSong === 3) {
-        return 3;
-    }
-}
 
 export function FileHandler() {
     const fileInput = React.createRef();
@@ -87,8 +70,6 @@ export function FileHandler() {
     const handleSubmit = async function (event) {
         event.preventDefault();
         let file = fileInput.current.files[0];
-        checkDefaultSong(song);
-
 
         // if file selected
         if (file) {
@@ -101,8 +82,19 @@ export function FileHandler() {
             }
         }
 
-        else if (song == 1) { // default song
+        // ALL DEFAULT SONGS
+        else if (song === 1) { // twinkle song
             file = twinkle_twinkle;
+            ReadJSON(file, setMidi, true);
+        }
+
+        else if (song === 2) { // happy song
+            file = happy_and_you_know_it
+            ReadJSON(file, setMidi, true);
+        }
+
+        else if (song === 3) { // lamb song
+            file = mary_had_a_lamb
             ReadJSON(file, setMidi, true);
         }
 
@@ -133,7 +125,7 @@ export function FileHandler() {
     </div>;
 }
 
-async function ReadJSON(file, setMidi, isDefault) {
+function ReadJSON(file, setMidi, isDefault) {
     let reader = new FileReader();
 
     if (isDefault) { // TODO file is incorrect when default
@@ -149,21 +141,7 @@ async function ReadJSON(file, setMidi, isDefault) {
 
 }
 
-function GetRequest(url) {
-    return fetch(url)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-
-        })
-        .catch(function (error) {
-            console.log("There has been a problem with your fetch operation: ", error.message);
-        });
-}
-
 function DisplayArea(props) {
-
     return (
 
         <TextareaAutosize disabled
@@ -171,12 +149,8 @@ function DisplayArea(props) {
             value={props.midiInfo}
             onChange={e => this.setState({ value: e.target.value })}
         />
-
-
     )
 }
-
-
 
 function GetSortOrder(prop) {
     return function (a, b) {
