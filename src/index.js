@@ -1,47 +1,59 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import './mainbar.css';
-import * as serviceWorker from './serviceWorker';
-import { Home, About } from './home';
-import { LongPiano } from './piano';
-import { FileHandler } from './fileHandler';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import "./mainbar.css";
+import { Transition } from "react-transition-group";
+import * as serviceWorker from "./serviceWorker";
+import { Home, About } from "./home";
+import { LongPiano } from "./piano";
+import { FileHandler } from "./fileHandler";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-document.title = 'Portfolioso 😋';
+document.title = "A guys's portfolio";
 
-function App(props) {
-    return (
-        <Router>
-            <div>
-                {/* Div for main top bar for routing */}
-                <ul className="topbar">
-                    <li>
-                        <Link to={'/'} className="nav-link"> Home </Link>
-                    </li>
-                    <li>
-                        <Link to={'/piano'} className="nav-link"> Piano </Link>
-                    </li>
-                    <li>
-                        <Link to={'/about'} className="nav-link"> About </Link>
-                    </li>
-                </ul>
+const routes = [
+  { path: "/", name: "Home", component: Home },
+  { path: "/about", name: "About", component: About },
+  { path: "/piano", name: "Piano", component: PianoPage }
+];
 
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/piano" render={(props) => (<div><FileHandler /><LongPiano /> </div>)} />
-                    <Route exact path="/about" component={About} />
-
-                </Switch>
-                {/* <FileHandler />
-                <LongPiano /> */}
-            </div>
-        </Router>
-
-    );
+function TopBar(props) {
+  return (
+    <ul className="topbar">
+      {routes.map(route => (
+        <li className="topbar">
+          <Link to={route.path}>{route.name}</Link>
+        </li>
+      ))}
+    </ul>
+  );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function PianoPage(props) {
+  return (
+    <div>
+      <FileHandler />
+      <LongPiano />{" "}
+    </div>
+  );
+}
+
+function App(props) {
+  return (
+    <Router>
+      <div>
+        <TopBar />
+        <Switch>
+          {routes.map(route => (
+            <Route exact path={route.path} component={route.component} />
+          ))}
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

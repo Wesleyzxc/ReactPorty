@@ -5,6 +5,10 @@ import { twinkle_twinkle, happy_and_you_know_it, mary_had_a_lamb } from './confi
 import './index.css';
 import { NOTE_TO_KEY } from './keybindings';
 
+document.onkeypress = function (e) {
+    e = e || window.event;
+    console.log(e);
+};
 
 function getNotes(midi, track) {
     let notes = midi.tracks[track].notes.map(note => {
@@ -77,7 +81,6 @@ export function FileHandler() {
                 ReadJSON(file, setMidi, false);
             }
             else {
-                //TODO make a nice pop up for wrong files
                 alert("Select a correct midi file!");
             }
         }
@@ -116,19 +119,17 @@ export function FileHandler() {
             </div>
         </form>
 
-        {/* <textarea id='textarea' value={midiInfo} disabled={true}></textarea> */}
-
         <div id="textarea">
             <DisplayArea midiInfo={midiInfo} orderedNotes={orderedNotes} />
         </div>
 
-    </div>;
+    </div >;
 }
 
 function ReadJSON(file, setMidi, isDefault) {
     let reader = new FileReader();
 
-    if (isDefault) { // TODO file is incorrect when default
+    if (isDefault) {
         setMidi(file);
     }
     else {
@@ -143,11 +144,12 @@ function ReadJSON(file, setMidi, isDefault) {
 
 function DisplayArea(props) {
     return (
-
-        <TextareaAutosize disabled
+        <TextareaAutosize
+            disabled
             useCacheForDOMMeasurements
             value={props.midiInfo}
             onChange={e => this.setState({ value: e.target.value })}
+
         />
     )
 }

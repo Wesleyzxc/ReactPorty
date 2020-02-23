@@ -12,6 +12,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-textarea-autosize": "^7.1.0",
+    "react-transition-group": "^4.3.0",
     "reactjs-popup": "^1.4.1",
     "soundfont-player": "^0.11.0",
     "tone": "^13.4.9"
