@@ -1,20 +1,27 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import "./mainbar.css";
-import { Transition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import * as serviceWorker from "./serviceWorker";
 import { Home, About } from "./home";
 import { LongPiano } from "./piano";
 import { FileHandler } from "./fileHandler";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Container, Navbar, Nav } from "react-bootstrap";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink
+} from "react-router-dom";
 
 document.title = "A guys's portfolio";
 
 const routes = [
-  { path: "/", name: "Home", component: Home },
-  { path: "/about", name: "About", component: About },
-  { path: "/piano", name: "Piano", component: PianoPage }
+  { path: "/", name: "Home", Component: Home },
+  { path: "/about", name: "About", Component: About },
+  { path: "/piano", name: "Piano", Component: PianoPage }
 ];
 
 function TopBar(props) {
@@ -22,7 +29,7 @@ function TopBar(props) {
     <ul className="topbar">
       {routes.map(route => (
         <li className="topbar">
-          <Link to={route.path}>{route.name}</Link>
+          <Link to={route.path}>{route.name} </Link>
         </li>
       ))}
     </ul>
@@ -33,7 +40,7 @@ function PianoPage(props) {
   return (
     <div>
       <FileHandler />
-      <LongPiano />{" "}
+      <LongPiano />
     </div>
   );
 }
@@ -41,14 +48,26 @@ function PianoPage(props) {
 function App(props) {
   return (
     <Router>
-      <div>
-        <TopBar />
-        <Switch>
-          {routes.map(route => (
-            <Route exact path={route.path} component={route.component} />
-          ))}
-        </Switch>
-      </div>
+      <TopBar />
+      <Container className="container">
+        {routes.map(({ path, Component }) => (
+          <Route key={path} exact path={path}>
+            {({ match }) => (
+              <CSSTransition
+                in={match != null}
+                timeout={500}
+                classNames="page"
+                unmountOnExit
+              >
+                <div className="page">
+                  {console.log(match)}
+                  <Component />
+                </div>
+              </CSSTransition>
+            )}
+          </Route>
+        ))}
+      </Container>
     </Router>
   );
 }

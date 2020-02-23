@@ -42,20 +42,69 @@ code {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
+/* for components not on top bar */
 li {
+  font-weight: 600;
   display: inline;
-  border: none;
+  border: 5px;
   text-align: right;
 }
 
 li a {
   text-decoration: none;
-  padding: 15px;
+  padding: 10px;
   color: black;
   transition: background-color 0.5s, color 0.5s;
 }
 
+/* each topbar component */
+li.topbar a {
+  font-weight: 700;
+  width: 50px;
+  padding: 20px;
+}
+
 li a:hover {
-  background-color: #555;
+  background-color: rgb(117, 117, 218);
   color: white;
+}
+
+li.topbar a:hover {
+  background-color: #555;
+}
+
+ul.topbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 20px;
+  background-color: grey;
+  text-align: right;
+}
+
+.page {
+  position: absolute;
+  left: 15px;
+  right: 15px;
+}
+
+.page-enter {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
 }
