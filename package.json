@@ -1,6 +1,9 @@
 {
   "name": "react-project",
   "version": "0.1.0",
+  "engines": {
+    "node": "v10.13.0"
+  },
   "private": true,
   "dependencies": {
     "@tonejs/midi": "^2.0.0",
