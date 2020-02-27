@@ -20,8 +20,7 @@
     "react-textarea-autosize": "^7.1.2",
     "react-transition-group": "^4.3.0",
     "reactjs-popup": "^1.5.0",
-    "soundfont-player": "^0.11.0",
-    "tone": "^13.8.25"
+    "soundfont-player": "^0.11.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Midi from "@tonejs/midi";
+import { Midi } from "@tonejs/midi";
 import { Input, makeStyles } from "@material-ui/core";
 import TextareaAutosize from "react-textarea-autosize";
 import {
@@ -122,7 +122,7 @@ export function FileHandler() {
             disableUnderline
             type="file"
             accept="audio/midi"
-            ref={fileInput}
+            inputRef={fileInput}
             className={classes.selector}
           ></Input>
         </div>
@@ -165,6 +165,7 @@ function ReadJSON(file, setMidi, isDefault) {
     reader.onload = function() {
       let arrayBuffer = this.result,
         array = new Uint8Array(arrayBuffer);
+      console.log(array);
       setMidi(new Midi(array));
     };
   }

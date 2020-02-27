@@ -33,14 +33,14 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   buttons: {
-    display: "flex",
-    paddingLeft: "75%"
+    display: "flex"
   }
 }));
 
 function MaterialTopBar() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -52,8 +52,8 @@ function MaterialTopBar() {
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
-          align="right"
           className={classes.buttons}
+          indicatorColor="primary"
         >
           {routes.map(route => (
             <Tab label={route.name} component={Link} to={route.path}></Tab>
