@@ -6,21 +6,36 @@ import * as serviceWorker from "./serviceWorker";
 import { Home, About } from "./home";
 import { LongPiano } from "./piano";
 import { FileHandler } from "./fileHandler";
-import { Container, Navbar, Nav } from "react-bootstrap";
-import { makeStyles } from "@material-ui/core/styles";
+import { Container } from "react-bootstrap";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  NavLink
-} from "react-router-dom";
+  createMuiTheme,
+  ThemeProvider,
+  makeStyles
+} from "@material-ui/core/styles";
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 document.title = "A guys's portfolio";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: "#757ce8",
+      main: "#1565c0",
+      dark: "#002884",
+      contrastText: "#fff"
+    },
+    secondary: {
+      light: "#ff7961",
+      main: "#f44336",
+      dark: "#ba000d",
+      contrastText: "#000"
+    }
+  }
+});
 
 const routes = [
   { path: "/", name: "Home", Component: Home },
@@ -46,23 +61,26 @@ function MaterialTopBar() {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="simple tabs example"
-          className={classes.buttons}
-          indicatorColor="primary"
-        >
-          {routes.map(route => (
-            <Tab label={route.name} component={Link} to={route.path}></Tab>
-          ))}
-        </Tabs>
-      </AppBar>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <AppBar position="static" color="primary">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+            className={classes.buttons}
+            indicatorColor="primary"
+          >
+            {routes.map(route => (
+              <Tab label={route.name} component={Link} to={route.path}></Tab>
+            ))}
+          </Tabs>
+        </AppBar>
+      </div>
+    </ThemeProvider>
   );
 }
+
 function PianoPage(props) {
   return (
     <div>
@@ -87,7 +105,6 @@ function App(props) {
                 unmountOnExit
               >
                 <div className="page">
-                  {console.log(match)}
                   <Component />
                 </div>
               </CSSTransition>

@@ -4,6 +4,10 @@
   padding: 5px;
 }
 
+.piano {
+  margin: auto;
+}
+
 #defaultsong,
 #submitFile {
   padding: 10px;
@@ -33,7 +37,14 @@ li a {
   text-decoration: none;
   padding: 10px;
   color: black;
+  border-radius: 5px;
   transition: background-color 0.5s, color 0.5s;
+}
+
+li a:hover {
+  background-color: #1565c0;
+  color: white;
+  border-radius: 5px;
 }
 
 /* each topbar component */
@@ -41,11 +52,6 @@ li.topbar a {
   font-weight: 700;
   width: 50px;
   padding: 20px;
-}
-
-li a:hover {
-  background-color: rgb(117, 117, 218);
-  color: white;
 }
 
 li.topbar a:hover {
