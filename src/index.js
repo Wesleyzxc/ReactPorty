@@ -7,6 +7,10 @@ import { Home, About } from "./home";
 import { LongPiano } from "./piano";
 import { FileHandler } from "./fileHandler";
 import { Container, Navbar, Nav } from "react-bootstrap";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 import {
   BrowserRouter as Router,
@@ -24,18 +28,41 @@ const routes = [
   { path: "/piano", name: "Piano", Component: PianoPage }
 ];
 
-function TopBar(props) {
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  buttons: {
+    display: "flex",
+    paddingLeft: "75%"
+  }
+}));
+
+function MaterialTopBar() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
-    <ul className="topbar">
-      {routes.map(route => (
-        <li className="topbar">
-          <Link to={route.path}>{route.name} </Link>
-        </li>
-      ))}
-    </ul>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+          align="right"
+          className={classes.buttons}
+        >
+          {routes.map(route => (
+            <Tab label={route.name} component={Link} to={route.path}></Tab>
+          ))}
+        </Tabs>
+      </AppBar>
+    </div>
   );
 }
-
 function PianoPage(props) {
   return (
     <div>
@@ -48,7 +75,7 @@ function PianoPage(props) {
 function App(props) {
   return (
     <Router>
-      <TopBar />
+      <MaterialTopBar></MaterialTopBar>
       <Container className="container">
         {routes.map(({ path, Component }) => (
           <Route key={path} exact path={path}>

@@ -1,15 +1,23 @@
 import React from "react";
 import "./index.css";
+import { Box, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  box: {
+    textAlign: "center"
+  }
+}));
 
 export function Home() {
+  const classes = useStyles();
   return (
     <div className="paras">
-      <h2>About me</h2>
-      <p>
+      <h2 style={{ textAlign: "center" }}>About me</h2>
+      <Box className={classes.box}>
         QUT Student from 2018-2020 as a Bachelor Of IT (Computer Science)
         student. I also study Data-centric Computing and (Networks and Security)
         as my minor.
-      </p>
+      </Box>
       <ul>
         <li>
           <a href="https://github.com/Wesleyzxc">GitHub</a>
@@ -20,5 +28,5 @@ export function Home() {
 }
 
 export function About() {
-  return <div>hi i love things</div>;
+  return <div className="paras">hi i love things</div>;
 }
