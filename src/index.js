@@ -22,12 +22,8 @@ import "./index.css";
 document.title = "A guys's portfolio";
 
 // Google Analytics
-function initializeReactGA() {
-  ReactGA.initialize("UA-159364795-1");
-  ReactGA.pageview("/");
-}
-
-initializeReactGA();
+ReactGA.initialize("UA-159364795-1");
+ReactGA.pageview("/");
 
 // primary theme
 const theme = createMuiTheme({
