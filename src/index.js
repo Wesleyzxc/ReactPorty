@@ -1,25 +1,33 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import * as serviceWorker from "./serviceWorker";
 import { Home, About } from "./home";
 import { LongPiano } from "./piano";
 import { FileHandler } from "./fileHandler";
 import { Container } from "react-bootstrap";
+
+import ReactGA from "react-ga";
+
 import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import { Tabs, Tab } from "@material-ui/core";
 import {
   createMuiTheme,
   ThemeProvider,
   makeStyles
 } from "@material-ui/core/styles";
-
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import "./index.css";
 
 document.title = "A guys's portfolio";
 
+// Google Analytics
+function initializeReactGA() {
+  ReactGA.initialize("UA-159364795-1");
+  ReactGA.pageview("/");
+}
+
+// primary theme
 const theme = createMuiTheme({
   palette: {
     primary: {
