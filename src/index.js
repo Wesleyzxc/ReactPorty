@@ -27,6 +27,8 @@ function initializeReactGA() {
   ReactGA.pageview("/");
 }
 
+initializeReactGA();
+
 // primary theme
 const theme = createMuiTheme({
   palette: {
