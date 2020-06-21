@@ -49,16 +49,7 @@ export function Home() {
   );
 }
 
-function CompanyTitle(props) {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.CompanyTitle}>
-      <p>{props.companyName}</p>
-      <p>{props.workDuration}</p>
-    </div>
-  );
-}
+// About tab onwards
 
 function CompanyDetails(props) {
   const classes = useStyles();
@@ -110,6 +101,17 @@ export function About() {
       {companyDeets.map((deets, i) => (
         <CompanyDetails jobNumber={i} />
       ))}
+    </div>
+  );
+}
+
+function CompanyTitle(props) {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.CompanyTitle}>
+      <p>{props.companyName}</p>
+      <p>{props.workDuration}</p>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { CSSTransition } from "react-transition-group";
 import * as serviceWorker from "./serviceWorker";
 import { Home, About } from "./home";
 import { LongPiano } from "./piano";
+import { Timer } from "./timer";
 import { FileHandler } from "./fileHandler";
 import { Container } from "react-bootstrap";
 
@@ -15,11 +16,11 @@ import { Tabs, Tab } from "@material-ui/core";
 import {
   createMuiTheme,
   ThemeProvider,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core/styles";
 import "./index.css";
 
-document.title = "A guys's portfolio";
+document.title = "Wesley's Portfolio";
 
 // Google Analytics
 ReactGA.initialize("UA-159364795-1");
@@ -32,30 +33,31 @@ const theme = createMuiTheme({
       light: "#757ce8",
       main: "#1565c0",
       dark: "#002884",
-      contrastText: "#fff"
+      contrastText: "#fff",
     },
     secondary: {
       light: "#ff7961",
       main: "#f44336",
       dark: "#ba000d",
-      contrastText: "#000"
-    }
-  }
+      contrastText: "#000",
+    },
+  },
 });
 
 const routes = [
   { path: "/", name: "Home", Component: Home },
   { path: "/about", name: "About", Component: About },
-  { path: "/piano", name: "Piano", Component: PianoPage }
+  { path: "/piano", name: "Piano", Component: PianoPage },
+  { path: "/timer", name: "Timer", Component: Timer },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   buttons: {
-    display: "flex"
-  }
+    display: "flex",
+  },
 }));
 
 function MaterialTopBar() {
@@ -77,7 +79,7 @@ function MaterialTopBar() {
             className={classes.buttons}
             indicatorColor="primary"
           >
-            {routes.map(route => (
+            {routes.map((route) => (
               <Tab label={route.name} component={Link} to={route.path}></Tab>
             ))}
           </Tabs>
