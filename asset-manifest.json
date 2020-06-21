@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/ReactPorty/static/css/main.3b1ed726.chunk.css",
+    "main.js": "/ReactPorty/static/js/main.ae7eee57.chunk.js",
+    "main.js.map": "/ReactPorty/static/js/main.ae7eee57.chunk.js.map",
+    "runtime~main.js": "/ReactPorty/static/js/runtime~main.5cd9b497.js",
+    "runtime~main.js.map": "/ReactPorty/static/js/runtime~main.5cd9b497.js.map",
+    "static/css/2.1e78366a.chunk.css": "/ReactPorty/static/css/2.1e78366a.chunk.css",
+    "static/js/2.b8a10822.chunk.js": "/ReactPorty/static/js/2.b8a10822.chunk.js",
+    "static/js/2.b8a10822.chunk.js.map": "/ReactPorty/static/js/2.b8a10822.chunk.js.map",
+    "index.html": "/ReactPorty/index.html",
+    "precache-manifest.022614db10ecdd5ee79c3bbabadede9e.js": "/ReactPorty/precache-manifest.022614db10ecdd5ee79c3bbabadede9e.js",
+    "service-worker.js": "/ReactPorty/service-worker.js",
+    "static/css/2.1e78366a.chunk.css.map": "/ReactPorty/static/css/2.1e78366a.chunk.css.map",
+    "static/css/main.3b1ed726.chunk.css.map": "/ReactPorty/static/css/main.3b1ed726.chunk.css.map",
+    "static/media/data.jpg": "/ReactPorty/static/media/data.76c38d83.jpg",
+    "static/media/yuens.jpg": "/ReactPorty/static/media/yuens.0516d3fc.jpg"
+  }
+}
