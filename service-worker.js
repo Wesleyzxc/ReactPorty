@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ReactPorty/precache-manifest.022614db10ecdd5ee79c3bbabadede9e.js"
+  "/ReactPorty/precache-manifest.6e7369b7403264ba12d53a8ea30fcb2e.js"
 );
 
 self.addEventListener('message', (event) => {
