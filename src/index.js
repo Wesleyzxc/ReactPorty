@@ -69,7 +69,7 @@ function MaterialTopBar() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <div className={classes.root}>
         <AppBar position="static" color="primary">
           <Tabs
@@ -85,7 +85,7 @@ function MaterialTopBar() {
           </Tabs>
         </AppBar>
       </div>
-    </ThemeProvider>
+    </div>
   );
 }
 
@@ -100,27 +100,29 @@ function PianoPage(props) {
 
 function App(props) {
   return (
-    <Router>
-      <MaterialTopBar></MaterialTopBar>
-      <Container className="container">
-        {routes.map(({ path, Component }) => (
-          <Route key={path} exact path={path}>
-            {({ match }) => (
-              <CSSTransition
-                in={match != null}
-                timeout={500}
-                classNames="page"
-                unmountOnExit
-              >
-                <div className="page">
-                  <Component />
-                </div>
-              </CSSTransition>
-            )}
-          </Route>
-        ))}
-      </Container>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <MaterialTopBar></MaterialTopBar>
+        <Container className="container">
+          {routes.map(({ path, Component }) => (
+            <Route key={path} exact path={path}>
+              {({ match }) => (
+                <CSSTransition
+                  in={match != null}
+                  timeout={500}
+                  classNames="page"
+                  unmountOnExit
+                >
+                  <div className="page">
+                    <Component />
+                  </div>
+                </CSSTransition>
+              )}
+            </Route>
+          ))}
+        </Container>
+      </Router>
+    </ThemeProvider>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
-import { Button, Slider } from "@material-ui/core";
+import { Button, Slider, FormHelperText } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 const PrettoSlider = withStyles({
@@ -52,7 +52,22 @@ export function Timer() {
 
   const [startTimer, setStart] = useState("stop"); // stop is nothing, start is exercise time and rest is rest time
 
+  const [fraction, setFraction] = useState(1);
+  function calculateTimeFraction() {
+    if (startTimer === "rest") setFraction(displayTime / next);
+    else setFraction(displayTime / value);
+    return fraction;
+  }
+  // Update the dasharray value as time passes, starting with 283
+  function setCircleDasharray() {
+    const circleDasharray = calculateTimeFraction() * 283 + " 283";
+    document
+      .getElementById("base-timer-path-remaining")
+      .setAttribute("stroke-dasharray", circleDasharray);
+  }
+
   useEffect(() => {
+    setCircleDasharray();
     if (startTimer === "start") {
       // set to exercise time
       setTimeout(() => {
@@ -82,18 +97,19 @@ export function Timer() {
   });
 
   return (
-    <div>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <div>Timer 1</div>
       <PrettoSlider
         valueLabelDisplay="auto"
         aria-label="start slider"
-        defaultValue={value}
+        value={value}
         onChange={handleStart}
       />
-      <div />
+      <div>Timer 2</div>
       <PrettoSlider
         valueLabelDisplay="auto"
         aria-label="rest slider"
-        defaultValue={next}
+        value={next}
         onChange={handleRest}
       />
       <div />
@@ -104,11 +120,7 @@ export function Timer() {
         onClick={() => setStart("start")}
       >
         Start
-      </Button>
-
-      {displayTime}
-      {/* display time here */}
-
+      </Button>{" "}
       <Button // stop button
         size="large"
         variant="contained"
@@ -117,6 +129,56 @@ export function Timer() {
       >
         Stop
       </Button>
+      <TimeValue time={displayTime} />
+    </div>
+  );
+}
+
+function TimeValue(props) {
+  function formatTimeLeft(time) {
+    // number of minutes
+    const minutes = Math.floor(time / 60);
+    // number of seconds minus minutes
+    let seconds = time % 60;
+    // If the value of seconds is less than 10, then display seconds with a leading zero
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+    // The output in MM:SS format
+    return `${minutes}:${seconds}`;
+  }
+
+  //TODO add styling
+  return (
+    <div className="base-timer">
+      <svg
+        className="base-timer__svg"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g className="base-timer__circle">
+          <circle
+            className="base-timer__path-elapsed"
+            cx="50"
+            cy="50"
+            r="45"
+          ></circle>
+          <path
+            id="base-timer-path-remaining"
+            strokeDasharray="283 283"
+            className="base-timer__path-remaining ${remainingPathColor}"
+            d="
+          M 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+          ></path>
+        </g>
+      </svg>
+      <span id="base-timer-label" className="base-timer__label">
+        {formatTimeLeft(props.time)}
+      </span>
     </div>
   );
 }
