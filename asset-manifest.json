@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.85a15fb0.chunk.css",
-    "main.js": "/portfolio/static/js/main.c01c010d.chunk.js",
-    "main.js.map": "/portfolio/static/js/main.c01c010d.chunk.js.map",
-    "runtime~main.js": "/portfolio/static/js/runtime~main.f308c8e6.js",
-    "runtime~main.js.map": "/portfolio/static/js/runtime~main.f308c8e6.js.map",
-    "static/css/2.1e78366a.chunk.css": "/portfolio/static/css/2.1e78366a.chunk.css",
-    "static/js/2.a3167e5b.chunk.js": "/portfolio/static/js/2.a3167e5b.chunk.js",
-    "static/js/2.a3167e5b.chunk.js.map": "/portfolio/static/js/2.a3167e5b.chunk.js.map",
-    "index.html": "/portfolio/index.html",
-    "precache-manifest.8cbc2cf180936da72ab59e6f6b6d6dc7.js": "/portfolio/precache-manifest.8cbc2cf180936da72ab59e6f6b6d6dc7.js",
-    "service-worker.js": "/portfolio/service-worker.js",
-    "static/css/2.1e78366a.chunk.css.map": "/portfolio/static/css/2.1e78366a.chunk.css.map",
-    "static/css/main.85a15fb0.chunk.css.map": "/portfolio/static/css/main.85a15fb0.chunk.css.map",
-    "static/media/data.jpg": "/portfolio/static/media/data.76c38d83.jpg",
-    "static/media/yuens.jpg": "/portfolio/static/media/yuens.0516d3fc.jpg"
+    "main.css": "/ReactPorty/static/css/main.85a15fb0.chunk.css",
+    "main.js": "/ReactPorty/static/js/main.5d71f406.chunk.js",
+    "main.js.map": "/ReactPorty/static/js/main.5d71f406.chunk.js.map",
+    "runtime~main.js": "/ReactPorty/static/js/runtime~main.5cd9b497.js",
+    "runtime~main.js.map": "/ReactPorty/static/js/runtime~main.5cd9b497.js.map",
+    "static/css/2.1e78366a.chunk.css": "/ReactPorty/static/css/2.1e78366a.chunk.css",
+    "static/js/2.a3167e5b.chunk.js": "/ReactPorty/static/js/2.a3167e5b.chunk.js",
+    "static/js/2.a3167e5b.chunk.js.map": "/ReactPorty/static/js/2.a3167e5b.chunk.js.map",
+    "index.html": "/ReactPorty/index.html",
+    "precache-manifest.6e7369b7403264ba12d53a8ea30fcb2e.js": "/ReactPorty/precache-manifest.6e7369b7403264ba12d53a8ea30fcb2e.js",
+    "service-worker.js": "/ReactPorty/service-worker.js",
+    "static/css/2.1e78366a.chunk.css.map": "/ReactPorty/static/css/2.1e78366a.chunk.css.map",
+    "static/css/main.85a15fb0.chunk.css.map": "/ReactPorty/static/css/main.85a15fb0.chunk.css.map",
+    "static/media/data.jpg": "/ReactPorty/static/media/data.76c38d83.jpg",
+    "static/media/yuens.jpg": "/ReactPorty/static/media/yuens.0516d3fc.jpg"
   }
 }
