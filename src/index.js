@@ -45,7 +45,7 @@ const theme = createMuiTheme({
 });
 
 const routes = [
-  { path: "/", name: "Home", Component: Home },
+  { path: "/ReactPorty", name: "Home", Component: Home },
   { path: "/about", name: "About", Component: About },
   { path: "/piano", name: "Piano", Component: PianoPage },
   { path: "/timer", name: "Timer", Component: Timer },
