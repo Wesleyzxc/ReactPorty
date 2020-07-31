@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 import { Button, Slider, FormHelperText } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import BEEP from "./assets/beep.mp3";
 
 const PrettoSlider = withStyles({
   root: {
@@ -135,6 +136,8 @@ export function Timer() {
 }
 
 function TimeValue(props) {
+  let audio = new Audio(BEEP);
+  console.log(audio.readyState);
   function formatTimeLeft(time) {
     // number of minutes
     const minutes = Math.floor(time / 60);
@@ -143,6 +146,12 @@ function TimeValue(props) {
     // If the value of seconds is less than 10, then display seconds with a leading zero
     if (seconds < 10) {
       seconds = `0${seconds}`;
+      if (seconds < 3) {
+        audio.addEventListener("canplaythrough", (event) => {
+          /* the audio is now playable; play it if permissions allow */
+          audio.play();
+        });
+      }
     }
     // The output in MM:SS format
     return `${minutes}:${seconds}`;

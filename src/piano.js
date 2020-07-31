@@ -11,14 +11,14 @@ const soundfontHostname = "https://d1pzp51pvbm36p.cloudfront.net";
 export function LongPiano() {
   const noteRange = {
     first: MidiNumbers.fromNote("c2"),
-    last: MidiNumbers.fromNote("c5")
+    last: MidiNumbers.fromNote("c5"),
   };
   const firstNote = noteRange.first;
   const lastNote = noteRange.last;
   const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: firstNote,
     lastNote: lastNote,
-    keyboardConfig: KEY_RANGE
+    keyboardConfig: KEY_RANGE,
   });
 
   // More precise key press but not available
