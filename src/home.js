@@ -125,6 +125,14 @@ function CompanyTitle(props) {
 
 const companyDeets = [
   {
+    companyName: "BetterBeliefs - Contract",
+    workDuration: "September 2020 - Present",
+    fileName: "bb",
+    text:
+      "● Develop tools and UI to manage clients of the BetterBeliefs technology platform",
+  },
+
+  {
     companyName: "Yuens Market Trading Co - Casual",
     workDuration: "March 2018 - Present",
     fileName: "yuens",

@@ -137,7 +137,6 @@ export function Timer() {
 
 function TimeValue(props) {
   let audio = new Audio(BEEP);
-  console.log(audio.readyState);
   function formatTimeLeft(time) {
     // number of minutes
     const minutes = Math.floor(time / 60);
