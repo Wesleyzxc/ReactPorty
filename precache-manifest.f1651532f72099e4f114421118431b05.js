@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "771d872f9589501a3468239f224d742d",
+    "revision": "903709cfdb7969930ba695d102763ff6",
     "url": "/ReactPorty/index.html"
   },
   {
-    "revision": "e0f499e022527b5f3ee6",
+    "revision": "576d5f1c8894d086d5d4",
     "url": "/ReactPorty/static/css/2.1e78366a.chunk.css"
   },
   {
-    "revision": "cadf90c5b5e483cf7811",
+    "revision": "e56f976987976777ce97",
     "url": "/ReactPorty/static/css/main.85a15fb0.chunk.css"
   },
   {
-    "revision": "e0f499e022527b5f3ee6",
-    "url": "/ReactPorty/static/js/2.10c105b2.chunk.js"
+    "revision": "576d5f1c8894d086d5d4",
+    "url": "/ReactPorty/static/js/2.69ecc81a.chunk.js"
   },
   {
-    "revision": "cadf90c5b5e483cf7811",
-    "url": "/ReactPorty/static/js/main.5d13413d.chunk.js"
+    "revision": "e56f976987976777ce97",
+    "url": "/ReactPorty/static/js/main.ea0ccc20.chunk.js"
   },
   {
     "revision": "05bba07980fbb3167048",
