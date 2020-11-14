@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import * as serviceWorker from "./serviceWorker";
 import { Home, About } from "./home";
 import { LongPiano } from "./piano";
 import { Timer } from "./timer";
+import { Recording } from "./recording.js";
 import { FileHandler } from "./fileHandler";
 import { Container } from "react-bootstrap";
 
@@ -13,11 +14,7 @@ import ReactGA from "react-ga";
 
 import AppBar from "@material-ui/core/AppBar";
 import { Tabs, Tab } from "@material-ui/core";
-import {
-  createMuiTheme,
-  ThemeProvider,
-  makeStyles,
-} from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider, makeStyles } from "@material-ui/core/styles";
 import "./index.css";
 
 document.title = "Wesley's Portfolio";
@@ -49,6 +46,7 @@ const routes = [
   { path: "/about", name: "About", Component: About },
   { path: "/piano", name: "Piano", Component: PianoPage },
   { path: "/timer", name: "Timer", Component: Timer },
+  { path: "/recording", name: "Recording", Component: Recording },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -72,15 +70,9 @@ function MaterialTopBar() {
     <div>
       <div className={classes.root}>
         <AppBar position="static" color="primary">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="simple tabs example"
-            className={classes.buttons}
-            indicatorColor="primary"
-          >
+          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" className={classes.buttons} indicatorColor="primary">
             {routes.map((route) => (
-              <Tab label={route.name} component={Link} to={route.path}></Tab>
+              <Tab key={route.name} label={route.name} component={Link} to={route.path}></Tab>
             ))}
           </Tabs>
         </AppBar>
@@ -102,17 +94,13 @@ function App(props) {
   return (
     <ThemeProvider theme={theme}>
       <Router>
+        <Redirect from="/" to="/ReactPorty"></Redirect>
         <MaterialTopBar></MaterialTopBar>
         <Container className="container">
           {routes.map(({ path, Component }) => (
             <Route key={path} exact path={path}>
               {({ match }) => (
-                <CSSTransition
-                  in={match != null}
-                  timeout={500}
-                  classNames="page"
-                  unmountOnExit
-                >
+                <CSSTransition value={path} in={match != null} timeout={500} classNames="page" unmountOnExit>
                   <div className="page">
                     <Component />
                   </div>

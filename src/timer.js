@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
-import { Button, Slider, FormHelperText } from "@material-ui/core";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { Button, Slider } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 import BEEP from "./assets/beep.mp3";
 
 const PrettoSlider = withStyles({
@@ -62,9 +62,7 @@ export function Timer() {
   // Update the dasharray value as time passes, starting with 283
   function setCircleDasharray() {
     const circleDasharray = calculateTimeFraction() * 283 + " 283";
-    document
-      .getElementById("base-timer-path-remaining")
-      .setAttribute("stroke-dasharray", circleDasharray);
+    document.getElementById("base-timer-path-remaining").setAttribute("stroke-dasharray", circleDasharray);
   }
 
   useEffect(() => {
@@ -100,34 +98,22 @@ export function Timer() {
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <div>Timer 1</div>
-      <PrettoSlider
-        valueLabelDisplay="auto"
-        aria-label="start slider"
-        value={value}
-        onChange={handleStart}
-      />
+      <PrettoSlider valueLabelDisplay="auto" aria-label="start slider" value={value} onChange={handleStart} />
       <div>Timer 2</div>
-      <PrettoSlider
-        valueLabelDisplay="auto"
-        aria-label="rest slider"
-        value={next}
-        onChange={handleRest}
-      />
+      <PrettoSlider valueLabelDisplay="auto" aria-label="rest slider" value={next} onChange={handleRest} />
       <div />
       <Button // start button
         size="large"
         variant="contained"
         color="primary"
-        onClick={() => setStart("start")}
-      >
+        onClick={() => setStart("start")}>
         Start
       </Button>{" "}
       <Button // stop button
         size="large"
         variant="contained"
         color="primary"
-        onClick={() => setStart("stop")}
-      >
+        onClick={() => setStart("stop")}>
         Stop
       </Button>
       <TimeValue time={displayTime} />
@@ -159,29 +145,19 @@ function TimeValue(props) {
   //TODO add styling
   return (
     <div className="base-timer">
-      <svg
-        className="base-timer__svg"
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg className="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <g className="base-timer__circle">
-          <circle
-            className="base-timer__path-elapsed"
-            cx="50"
-            cy="50"
-            r="45"
-          ></circle>
+          <circle className="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
           <path
             id="base-timer-path-remaining"
             strokeDasharray="283 283"
-            className="base-timer__path-remaining ${remainingPathColor}"
+            className="base-timer__path-remaining"
             d="
           M 50, 50
           m -45, 0
           a 45,45 0 1,0 90,0
           a 45,45 0 1,0 -90,0
-        "
-          ></path>
+        "></path>
         </g>
       </svg>
       <span id="base-timer-label" className="base-timer__label">

@@ -2,21 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Midi } from "@tonejs/midi";
 import { Input, makeStyles } from "@material-ui/core";
 import TextareaAutosize from "react-textarea-autosize";
-import {
-  twinkle_twinkle,
-  happy_and_you_know_it,
-  mary_had_a_lamb
-} from "./config";
+import { twinkle_twinkle, happy_and_you_know_it, mary_had_a_lamb } from "./config";
 import "./index.css";
 import { NOTE_TO_KEY } from "./keybindings";
 
-document.onkeypress = function(e) {
-  e = e || window.event;
-  console.log(e);
-};
-
 function getNotes(midi, track) {
-  let notes = midi.tracks[track].notes.map(note => {
+  let notes = midi.tracks[track].notes.map((note) => {
     return { note: note.name, time: note.time };
   });
   return notes;
@@ -41,14 +32,14 @@ function organiseNotes(notes, modifiedArray) {
   });
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   selector: {
     display: "inline-block",
-    paddingTop: "15px"
+    paddingTop: "15px",
   },
   wrap: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 export function FileHandler() {
@@ -79,14 +70,14 @@ export function FileHandler() {
       let noteStr = orderedNotes.join();
 
       // noteStr is replaced by all keys
-      NOTE_TO_KEY.forEach(notePair => {
+      NOTE_TO_KEY.forEach((notePair) => {
         noteStr = replaceAll(noteStr, notePair[0], notePair[1]);
       });
       setMidiInfo(midi.name + "\n" + noteStr);
     }
-  }, [midi]);
+  }, [midi, orderedNotes]);
 
-  const handleSubmit = async function(event) {
+  const handleSubmit = async function (event) {
     event.preventDefault();
     let file = fileInput.current.files[0];
 
@@ -118,13 +109,7 @@ export function FileHandler() {
     <div>
       <form onSubmit={handleSubmit}>
         <div className={classes.wrap}>
-          <Input
-            disableUnderline
-            type="file"
-            accept="audio/midi"
-            inputRef={fileInput}
-            className={classes.selector}
-          ></Input>
+          <Input disableUnderline type="file" accept="audio/midi" inputRef={fileInput} className={classes.selector}></Input>
         </div>
 
         <div className="groups">
@@ -133,8 +118,7 @@ export function FileHandler() {
             onChange={() => {
               let e = document.getElementById("defaultsong");
               setSong(parseInt(e.options[e.selectedIndex].value, 10));
-            }}
-          >
+            }}>
             <option value="0" selected>
               Choose one of the default songs to try!{" "}
             </option>
@@ -162,28 +146,20 @@ function ReadJSON(file, setMidi, isDefault) {
     setMidi(file);
   } else {
     reader.readAsArrayBuffer(file);
-    reader.onload = function() {
+    reader.onload = function () {
       let arrayBuffer = this.result,
         array = new Uint8Array(arrayBuffer);
-      console.log(array);
       setMidi(new Midi(array));
     };
   }
 }
 
 function DisplayArea(props) {
-  return (
-    <TextareaAutosize
-      disabled
-      useCacheForDOMMeasurements
-      value={props.midiInfo}
-      onChange={e => this.setState({ value: e.target.value })}
-    />
-  );
+  return <TextareaAutosize disabled useCacheForDOMMeasurements value={props.midiInfo} onChange={(e) => this.setState({ value: e.target.value })} />;
 }
 
 function GetSortOrder(prop) {
-  return function(a, b) {
+  return function (a, b) {
     if (a[prop] > b[prop]) {
       return 1;
     } else if (a[prop] < b[prop]) {

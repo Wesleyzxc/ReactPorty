@@ -38,12 +38,11 @@ export function Home() {
     <div className="paras">
       <h2 style={{ textAlign: "center" }}>About me</h2>
       <Box className={classes.box}>
-        QUT Student from 2018-2020 as a Bachelor Of IT (Computer Science)
-        student. I also study Data-centric Computing and (Networks and Security)
-        as my minor.
+        QUT Student from 2018-2020 as a Bachelor Of IT (Computer Science) student. I also study Data-centric Computing and (Networks and Security) as
+        my minor.
       </Box>
       <IconButton>
-        <a href={RESUME} target="_blank">
+        <a href={RESUME} rel="noopener noreferrer" target="_blank">
           <DescriptionIcon fontSize="large" />
         </a>
       </IconButton>
@@ -65,13 +64,8 @@ function CompanyDetails(props) {
     return (
       <div className={classes.image}>
         <div className={classes.companyInfo}>
-          <CompanyTitle
-            companyName={companyDeets[props.jobNumber].companyName}
-            workDuration={companyDeets[props.jobNumber].workDuration}
-          />
-          <p style={{ whiteSpace: "pre-wrap", lineHeight: "3em" }}>
-            {companyDeets[props.jobNumber].text}
-          </p>
+          <CompanyTitle companyName={companyDeets[props.jobNumber].companyName} workDuration={companyDeets[props.jobNumber].workDuration} />
+          <p style={{ whiteSpace: "pre-wrap", lineHeight: "3em" }}>{companyDeets[props.jobNumber].text}</p>
         </div>
         <img
           style={{ maxHeight: "400px", maxWidth: "400px" }}
@@ -90,13 +84,8 @@ function CompanyDetails(props) {
           src={require(`./imgz/${companyDeets[props.jobNumber].fileName}.jpg`)}
         />
         <div className={classes.companyInfo}>
-          <CompanyTitle
-            companyName={companyDeets[props.jobNumber].companyName}
-            workDuration={companyDeets[props.jobNumber].workDuration}
-          />
-          <p style={{ whiteSpace: "pre-wrap", lineHeight: "3em" }}>
-            {companyDeets[props.jobNumber].text}
-          </p>
+          <CompanyTitle companyName={companyDeets[props.jobNumber].companyName} workDuration={companyDeets[props.jobNumber].workDuration} />
+          <p style={{ whiteSpace: "pre-wrap", lineHeight: "3em" }}>{companyDeets[props.jobNumber].text}</p>
         </div>
       </div>
     );
@@ -128,8 +117,7 @@ const companyDeets = [
     companyName: "BetterBeliefs - Contract",
     workDuration: "September 2020 - Present",
     fileName: "bb",
-    text:
-      "● Develop tools and UI to manage clients of the BetterBeliefs technology platform",
+    text: "● Develop tools and UI to manage clients of the BetterBeliefs technology platform",
   },
 
   {
