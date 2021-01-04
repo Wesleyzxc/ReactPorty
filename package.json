@@ -12,6 +12,7 @@
     "@material/react-menu": "^0.15.0",
     "@tonejs/midi": "^2.0.15",
     "midi-file": "^1.1.2",
+    "p2p-chat": "^3.0.0",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
